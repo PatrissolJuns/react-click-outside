@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { fireEvent } from '@testing-library/react';
-import useClickOutsideListener, { UseClickOutsideListenerOptions } from '../src/useClickOutsideListener';
+import { useClickOutsideListener, UseClickOutsideListenerOptions } from '../src';
 
 describe('useClickOutsideListener', () => {
     let options: UseClickOutsideListenerOptions;
