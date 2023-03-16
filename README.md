@@ -1,6 +1,8 @@
-# Welcome to @juns/react-click-outside 🎉
+# Welcome to @patrissoljuns/react-click-outside 🎉
 
-Looking for an easy and efficient way to handle click-away interactions in your React application? Look no further! Introducing **@juns/react-click-outside**, a lightweight and powerful package that offers a hassle-free solution for handling click-away events in React applications.
+[![codecov](https://codecov.io/gh/PatrissolJuns/react-click-outside/branch/master/graph/badge.svg?token=SG6YLK9DMU)](https://codecov.io/gh/PatrissolJuns/react-click-outside)
+
+Looking for an easy and efficient way to handle click-away interactions in your React application? Look no further! Introducing **@patrissoljuns/react-click-outside**, a lightweight and powerful package that offers a hassle-free solution for handling click-away events in React applications.
 Whether you're working on dropdowns, modals, or any other UI components that need to close when a user interacts outside of them, this package has got your back.
 
 ## 🔥 Features
@@ -12,9 +14,9 @@ Whether you're working on dropdowns, modals, or any other UI components that nee
 
 ## 📦 Installation
 ````shell
-npm install @juns/react-click-outside
+npm install @patrissoljuns/react-click-outside
 # or
-yarn add @juns/react-click-outside
+yarn add @patrissoljuns/react-click-outside
 ````
 
 ## 🚀 Usage
@@ -25,7 +27,7 @@ Here's a simple example of using the `ClickOutsideListener` component to close a
 
 ````tsx
 import React, { useState } from 'react';
-import ClickOutsideListener from '@juns/react-click-outside';
+import ClickOutsideListener from '@patrissoljuns/react-click-outside';
 
 const MyComponent = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -59,7 +61,7 @@ const MyComponent = () => {
 Alternatively, you can use the `useClickAwayListener` hook to programmatically handle click-away events
 ````tsx
 import React, { useState } from 'react';
-import { useClickOutsideListener } from '@juns/react-click-outside';
+import { useClickOutsideListener } from '@patrissoljuns/react-click-outside';
 
 const ExampleComponent = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -106,7 +108,7 @@ Same with useClickOutsideListener above plus the following:
 
 ````tsx
 import React, { useState } from 'react';
-import ClickOutsideListener, { UseClickOutsideListenerOptions } from '@juns/react-click-outside';
+import ClickOutsideListener, { UseClickOutsideListenerOptions } from '@patrissoljuns/react-click-outside';
 
 const App = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -145,7 +147,7 @@ export default App;
 
 ````tsx
 import React, {useState} from 'react';
-import useClickOutsideListener from "@juns/react-click-outside";
+import useClickOutsideListener from "@patrissoljuns/react-click-outside";
 import { Button, Popover, MenuList, MenuItem } from '@mui/material';
 
 const MuiPopoverExample: React.FC = () => {
@@ -204,7 +206,7 @@ const MuiPopoverExample: React.FC = () => {
 
 ````tsx
 import React, { useState } from 'react';
-import useClickOutsideListener from '@juns/react-click-outside';
+import useClickOutsideListener from '@patrissoljuns/react-click-outside';
 import { Button, Typography, Card } from 'antd';
 
 const TouchPanelExample: React.FC = () => {
