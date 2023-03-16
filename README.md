@@ -1,8 +1,8 @@
 # Welcome to @patrissoljuns/react-click-outside 🎉
 
-[![npm version](https://badge.fury.io/js/@patrissoljuns%2Freact-click-outside.svg)](https://badge.fury.io/js/@patrissoljuns%2Freact-click-outside)
-[![codecov](https://codecov.io/gh/PatrissolJuns/react-click-outside/branch/master/graph/badge.svg?token=SG6YLK9DMU)](https://codecov.io/gh/PatrissolJuns/react-click-outside)
-[![Build Status](https://github.com/PatrissolJuns/react-click-outside/actions/workflows/test.yml/badge.svg)](https://github.com/USERNAME/REPOSITORY/actions)
+[![npm version](https://badge.fury.io/js/@patrissoljuns%2Freact-click-outside.svg)](https://www.npmjs.com/package/@patrissoljuns/react-click-outside)
+[![codecov](https://codecov.io/gh/PatrissolJuns/react-click-outside/branch/master/graph/badge.svg?token=SG6YLK9DMU)](https://codecov.io/gh/PatrissolJuns/react-click-outside/tree/master/tests)
+[![Build Status](https://github.com/PatrissolJuns/react-click-outside/actions/workflows/test.yml/badge.svg)](https://github.com/PatrissolJuns/react-click-outside/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Looking for an easy and efficient way to handle click-away interactions in your React application? Look no further! Introducing **@patrissoljuns/react-click-outside**, a lightweight and powerful package that offers a hassle-free solution for handling click-away events in React applications.
