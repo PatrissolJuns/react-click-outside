@@ -3,6 +3,7 @@ import { useEffect, useRef, MutableRefObject } from 'react';
 type EventType =
     | 'mousedown'
     | 'mouseup'
+    | 'mouseover'
     | 'click'
     | 'touchstart'
     | 'touchend'
