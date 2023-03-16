@@ -1,6 +1,6 @@
 {
   "name": "@patrissoljuns/react-click-outside",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component and hook to handle clicks outside a specified element, useful for closing dropdowns, modals, and more.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
