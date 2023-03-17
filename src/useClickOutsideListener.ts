@@ -34,7 +34,9 @@ const useClickOutsideListener = <T extends HTMLElement>(
     const handleClickOutside: EventListener = (
         event: MouseEvent | TouchEvent | KeyboardEvent | FocusEvent,
     ) => {
-        if (!nodeRef.current) return;
+        if (!nodeRef.current) {
+            return console.error('nodeRef is falsy. Make sure to pass a valid ref to useClickOutsideListener.');   
+        }
 
         // Handle keyboard events
         if (event instanceof KeyboardEvent) {
