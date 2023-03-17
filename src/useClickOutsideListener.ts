@@ -53,7 +53,7 @@ const useClickOutsideListener = <T extends HTMLElement>(
     };
 
     useEffect(() => {
-        const _scope = scope === null ? null : scope || document
+        const _scope = scope || document
         if (_scope !== null) {
             events.forEach((event) => _scope.addEventListener(event, handleClickOutside));
 
