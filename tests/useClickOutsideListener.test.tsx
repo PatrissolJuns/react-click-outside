@@ -68,7 +68,7 @@ describe('useClickOutsideListener', () => {
         expect(removeEventListenerSpy).toHaveBeenCalledTimes(options.events!.length);
     });
 
-    it('should throw an error when nodeRef.current is falsy (e.g. null or undefined)', () => {
+    test('should throw an error when nodeRef.current is falsy (e.g. null or undefined)', () => {
         const { result } = renderHook(() => useClickOutsideListener(options));
         const nodeRef = result.current;
         jest.spyOn(console, 'error').mockImplementation(() => { });
