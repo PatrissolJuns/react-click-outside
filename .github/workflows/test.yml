@@ -15,7 +15,7 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: yarn
+        run: npm ci
 
       - name: Run tests and upload coverage to Codecov
         run: npm run coverage
