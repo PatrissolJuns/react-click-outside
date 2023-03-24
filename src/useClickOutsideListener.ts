@@ -16,13 +16,30 @@ export interface UseClickOutsideListenerOptions {
     onClickOutside: (event: MouseEvent | TouchEvent | KeyboardEvent | FocusEvent) => void;
     events?: EventType[];
     scope?: HTMLElement | Document | null;
+    exclude?: MutableRefObject<HTMLElement>[];
 }
 
 const useClickOutsideListener = <T extends HTMLElement>(
     options: UseClickOutsideListenerOptions
 ): MutableRefObject<T | null> => {
-    const { onClickOutside, events = ['mousedown'], scope } = options;
+    const { onClickOutside, events = ['mousedown'], scope, exclude } = options;
     const nodeRef = useRef<T | null>(null);
+
+    // A wrapper around onClickOutside to exclude some event sources
+    const _onClickOutside = (event: MouseEvent | TouchEvent | KeyboardEvent | FocusEvent) => {
+        const eventTarget = event.target as Node
+        if (exclude) {
+            // Get all node ref who have current property set
+            const excludedTarget = exclude.filter(nodeRef => !(!nodeRef.current));
+
+            // Check whether the click came from excluded Nodes
+            if (excludedTarget.filter((nodeRef) => nodeRef.current.contains(eventTarget)).length === 0) {
+                onClickOutside(event)
+            }
+            return;
+        }
+        onClickOutside(event)
+    }
 
     /**
     * Handles click outside events.
@@ -33,14 +50,12 @@ const useClickOutsideListener = <T extends HTMLElement>(
     const handleClickOutside: EventListener = (
         event: MouseEvent | TouchEvent | KeyboardEvent | FocusEvent,
     ) => {
-        if (!nodeRef.current) {
-            return console.error('nodeRef is falsy. Make sure to pass a valid ref to useClickOutsideListener.');   
-        }
+        if (!nodeRef.current) return;
 
         // Handle keyboard events
         if (event instanceof KeyboardEvent) {
             if (event.type === 'keydown' || event.type === 'keyup') {
-                onClickOutside(event);
+                _onClickOutside(event);
             }
             return;
         }
@@ -48,14 +63,14 @@ const useClickOutsideListener = <T extends HTMLElement>(
         // Handle focus and blur events
         if (event instanceof FocusEvent) {
             if (event.type === 'focus' || event.type === 'blur') {
-                onClickOutside(event);
+                _onClickOutside(event);
             }
             return;
         }
 
         // Handle click and touch events
         if (!nodeRef.current.contains(event.target as Node)) {
-            onClickOutside(event);
+            _onClickOutside(event);
         }
     };
 
