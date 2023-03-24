@@ -24,7 +24,6 @@ const useClickOutsideListener = <T extends HTMLElement>(
     const { onClickOutside, events = ['mousedown'], scope } = options;
     const nodeRef = useRef<T | null>(null);
 
-
     /**
     * Handles click outside events.
     * Calls the onClickOutside callback if the click outside event occurs
