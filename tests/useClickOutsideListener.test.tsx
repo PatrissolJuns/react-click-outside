@@ -20,57 +20,62 @@ describe('useClickOutsideListener', () => {
     });
 
     afterEach(() => {
-         document.body.removeChild(target);
+        document.body.removeChild(target);
     });
 
-     test('should call onClickOutside when clicking outside the element', () => {
-         const { result } = renderHook(() => useClickOutsideListener(options));
-         const nodeRef = result.current;
-         nodeRef.current = target;
+    test('should call onClickOutside when clicking outside the element', async () => {
+        options.events = ['keydown', 'keyup', 'mousedown', 'focus',]
+        const { result } = renderHook(() => useClickOutsideListener(options));
+        const nodeRef = result.current;
+        nodeRef.current = target;
 
-         act(() => {
-             fireEvent.mouseDown(document.body);
-         });
+        await waitFor(() => {
+            fireEvent.mouseDown(document.body);
+            fireEvent.keyDown(document.body);
+            fireEvent.keyUp(document.body);
+            fireEvent.keyUp(document.body);
+            fireEvent.focusIn(document.body);
+        });
 
-         expect(options.onClickOutside).toHaveBeenCalledTimes(1);
-     });
+        expect(options.onClickOutside).toHaveBeenCalledTimes(4);
+    });
 
-     test('should not call onClickOutside when clicking inside the element', () => {
-         const { result } = renderHook(() => useClickOutsideListener(options));
-         const nodeRef = result.current;
-         nodeRef.current = target;
+    test('should not call onClickOutside when clicking inside the element', () => {
+        const { result } = renderHook(() => useClickOutsideListener(options));
+        const nodeRef = result.current;
+        nodeRef.current = target;
 
-         act(() => {
-             fireEvent.mouseDown(target);
-         });
+        act(() => {
+            fireEvent.mouseDown(target);
+        });
 
-         expect(options.onClickOutside).toHaveBeenCalledTimes(0);
-     });
+        expect(options.onClickOutside).toHaveBeenCalledTimes(0);
+    });
 
-     test('should handle multiple event types', () => {
-         options.events = ['mousedown', 'mouseup'];
-         const { result } = renderHook(() => useClickOutsideListener(options));
-         const nodeRef = result.current;
-         nodeRef.current = target;
+    test('should handle multiple event types', () => {
+        options.events = ['mousedown', 'mouseup'];
+        const { result } = renderHook(() => useClickOutsideListener(options));
+        const nodeRef = result.current;
+        nodeRef.current = target;
 
-         act(() => {
-             fireEvent.mouseDown(document.body);
-             fireEvent.mouseUp(document.body);
-         });
+        act(() => {
+            fireEvent.mouseDown(document.body);
+            fireEvent.mouseUp(document.body);
+        });
 
-         expect(options.onClickOutside).toHaveBeenCalledTimes(2);
-     });
+        expect(options.onClickOutside).toHaveBeenCalledTimes(2);
+    });
 
-     test('should clean up event listeners when unmounting', () => {
-         const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
-         const { result, unmount } = renderHook(() => useClickOutsideListener(options));
-         const nodeRef = result.current;
-         nodeRef.current = target;
+    test('should clean up event listeners when unmounting', () => {
+        const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
+        const { result, unmount } = renderHook(() => useClickOutsideListener(options));
+        const nodeRef = result.current;
+        nodeRef.current = target;
 
-         unmount();
+        unmount();
 
-         expect(removeEventListenerSpy).toHaveBeenCalledTimes(options.events!.length);
-     });
+        expect(removeEventListenerSpy).toHaveBeenCalledTimes(options.events!.length);
+    });
 
     test('should not call onClickOutside when clicking inside exluded elements', async () => {
         const onClickOutside = jest.fn();
