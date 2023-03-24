@@ -18,6 +18,6 @@ jobs:
         run: npm ci
 
       - name: Run tests and upload coverage to Codecov
-        run: npm coverage
+        run: npm run coverage
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
