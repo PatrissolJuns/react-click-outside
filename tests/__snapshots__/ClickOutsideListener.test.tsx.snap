@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ClickOutsideListener renders without errors 1`] = `
-<div>
-  <div>
-    Wrapped Component
-  </div>
-</div>
-`;

@@ -11,11 +11,12 @@ const ClickOutsideListener = <T extends HTMLElement>({
         onClickOutside,
         events,
         scope,
+        exclude,
         children,
         wrapperComponent,
         wrapperProps,
     }: ClickOutsideListenerProps<T>) => {
-    const nodeRef = useClickOutsideListener<T>({ onClickOutside, events, scope });
+    const nodeRef = useClickOutsideListener<T>({ onClickOutside, events, scope, exclude });
 
     if (wrapperComponent) {
         const WrapperComponent = wrapperComponent;
