@@ -1,8 +1,7 @@
 import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useClickOutsideListener, UseClickOutsideListenerOptions } from '../src';
-import { MutableRefObject } from 'react';
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 
 describe('useClickOutsideListener', () => {
     let options: UseClickOutsideListenerOptions;
