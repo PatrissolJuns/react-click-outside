@@ -16,19 +16,39 @@ export interface UseClickOutsideListenerOptions {
     onClickOutside: (event: MouseEvent | TouchEvent | KeyboardEvent | FocusEvent) => void;
     events?: EventType[];
     scope?: HTMLElement | Document | null;
+    exclude?: MutableRefObject<HTMLElement | null>[] | null;
 }
 
 const useClickOutsideListener = <T extends HTMLElement>(
     options: UseClickOutsideListenerOptions
 ): MutableRefObject<T | null> => {
-    const { onClickOutside, events = ['mousedown'], scope } = options;
+    const { onClickOutside, events = ['mousedown'], scope, exclude } = options;
     const nodeRef = useRef<T | null>(null);
 
+    /**
+    * Handles click outside events.
+    * Calls the onClickOutside callback if the click outside event occurs
+    * outside the node specified by the nodeRef.
+    */
     // @ts-ignore
     const handleClickOutside: EventListener = (
         event: MouseEvent | TouchEvent | KeyboardEvent | FocusEvent,
     ) => {
         if (!nodeRef.current) return;
+
+        // Get the event source target
+        const eventTarget = event.target as Node
+
+        if (exclude) {
+            // Get all node ref who have current property set
+            const excludedTarget = exclude.filter(ref => !(!ref.current))
+                // Check whether the click came from excluded Nodes
+                .filter((ref) => ref.current && ref.current.contains(eventTarget));
+
+            if (excludedTarget.length !== 0) {
+                return;
+            }
+        }
 
         // Handle keyboard events
         if (event instanceof KeyboardEvent) {
@@ -53,7 +73,7 @@ const useClickOutsideListener = <T extends HTMLElement>(
     };
 
     useEffect(() => {
-        const _scope = scope === null ? null : scope || document
+        const _scope = scope || document
         if (_scope !== null) {
             events.forEach((event) => _scope.addEventListener(event, handleClickOutside));
 
@@ -61,7 +81,7 @@ const useClickOutsideListener = <T extends HTMLElement>(
                 events.forEach((event) => _scope.removeEventListener(event, handleClickOutside));
             };
         }
-    }, [events, scope, handleClickOutside]);
+    }, [events, scope, exclude, handleClickOutside]);
 
     return nodeRef;
 };
